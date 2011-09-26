@@ -1,0 +1,19 @@
+{
+  "name": "Link grabber",
+  "version": "1.0",
+  "description": "Extract all links from webpage.",
+  "page_action": {
+    "default_icon": "link-grabber.png",
+    "default_title": "Grab links from this page."
+  },
+  "background_page": "background.html",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["jquery.min.js", "grabber.js"]
+    }
+  ],
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ]
+}

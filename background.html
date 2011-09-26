@@ -1,0 +1,26 @@
+<head>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+    chrome.tabs.onUpdated.addListener(
+        function(tab, b) {
+            chrome.pageAction.show(tab);
+        }
+    );
+    chrome.pageAction.onClicked.addListener(
+        function(tab) {
+            chrome.tabs.sendRequest(tab.id, {"command": "parse"}, 
+                function(response) { 
+                    var url = chrome.extension.getURL('result.html');
+                    chrome.tabs.create({url: url},
+                        function(tab) {
+                            chrome.tabs.sendRequest(tab.id, {"command": "show", "result": response.links}); 
+                        }
+                    );
+                }
+            );
+        }
+    );
+</script>
+</head>
+<body>
+</body>

@@ -1,0 +1,26 @@
+<head>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+    chrome.extension.onRequest.addListener(
+        function(request, sender, sendResponse) {
+            if(request.command == "show") {
+                for(i = 0; i < request.result.length; i++)
+                {
+                    r = request.result[i];
+                    if(r) {
+                        $('.content').append('<a href="'+r+'">'+r+'</a><br/>');
+                    }
+                }
+                
+            } else {
+                sendResponse({});
+            }
+        }
+    );
+</script>
+</head>
+<body>
+    <h1>Result</h1>
+    <div class="content">
+    </div>
+</body>
